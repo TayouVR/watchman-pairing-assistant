@@ -1,5 +1,5 @@
 {
-  description = "Nix package and dev shells for the project";
+  description = "GUI for pairing SteamVR Tracking devices using lighthouse_console";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 

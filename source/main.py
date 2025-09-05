@@ -9,6 +9,8 @@ import sys
 
 import usb_util
 
+VERSION = "2.2.1"
+
 def _user_config_dir(app_name: str) -> str:
     # Cross-platform user config dir
     # Linux/macOS: $XDG_CONFIG_HOME/app_name or ~/.config/app_name
@@ -170,7 +172,7 @@ class App(ctk.CTk):
         self.textbox_log.grid(row=2, column=1, padx=(20, 20), pady=(10, 20), sticky="nsew")
 
         #reset
-        self.insert_log("Welcome to watchman_pairing_assistant ! (v2.0)")
+        self.insert_log(f"Welcome to watchman_pairing_assistant ! (v{VERSION})")
         self.sidebar_frame.sidebar_button_reload_callback()
         
     def insert_log(self,log):#Functio to display logs in console and text box
@@ -288,5 +290,9 @@ class App(ctk.CTk):
         return config
 
 if __name__ == "__main__":
-    app = App() 
+    app = App()
+    app.mainloop()
+
+def main():
+    app = App()
     app.mainloop()

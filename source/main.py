@@ -9,6 +9,17 @@ import sys
 
 import usb_util
 
+def _user_config_dir(app_name: str) -> str:
+    # Cross-platform user config dir
+    # Linux/macOS: $XDG_CONFIG_HOME/app_name or ~/.config/app_name
+    # Windows: %APPDATA%\AppName
+    if sys.platform == "win32":
+        base = os.environ.get("APPDATA", os.path.join(os.path.expanduser("~"), "AppData", "Roaming"))
+        return os.path.join(base, app_name)
+    else:
+        base = os.environ.get("XDG_CONFIG_HOME", os.path.join(os.path.expanduser("~"), ".config"))
+        return os.path.join(base, app_name)
+
 class SidebarFrame(ctk.CTkFrame):
     def __init__(self, master, app_instance, **kwargs):#Widget Placement
         super().__init__(master, width=140, corner_radius=0, **kwargs)
@@ -245,8 +256,10 @@ class App(ctk.CTk):
         return exe_path
 
     def load_config(self):  # Generating and getting json
-        config_path = os.path.join(os.path.dirname(sys.argv[0]), "resources", "config.json")
-        resources_dir = os.path.join(os.path.dirname(sys.argv[0]), "resources")
+        app_name = "watchman-pairing-assistant"
+        config_dir = _user_config_dir(app_name)
+        os.makedirs(config_dir, exist_ok=True)
+        config_path = os.path.join(config_dir, "config.json")
 
         # debug for current user dir
         print(os.path.expanduser('~'))
@@ -263,9 +276,6 @@ class App(ctk.CTk):
             "theme": "Dark",
             "lighthouse_console_path": default_lh_console_path
         }
-
-        if not os.path.exists(resources_dir):
-            os.makedirs(resources_dir, exist_ok=True)
 
         if not os.path.exists(config_path):
             with open(config_path, "w") as config_file:

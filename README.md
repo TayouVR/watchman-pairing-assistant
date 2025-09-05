@@ -13,7 +13,7 @@ GUI for pairing SteamVR Tracking devices using lighthouse_console
 
 ### NixOS
 ```nix
-nix run github:TayouVR/WatchmanPairingAssistant
+nix run github:TayouVR/watchman-pairing-assistant
 ```
 
 ### Other

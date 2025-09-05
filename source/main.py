@@ -248,9 +248,20 @@ class App(ctk.CTk):
         config_path = os.path.join(os.path.dirname(sys.argv[0]), "resources", "config.json")
         resources_dir = os.path.join(os.path.dirname(sys.argv[0]), "resources")
 
+        # debug for current user dir
+        print(os.path.expanduser('~'))
+        partial_lh_console_bin_path = os.path.join("steamapps", "common", "SteamVR", "tools", "lighthouse", "bin")
+
+        if sys.platform == 'win32':
+            default_lh_console_path = os.path.join(
+                "C:", "Program Files (x86)", "Steam", partial_lh_console_bin_path, "win64", "lighthouse_console.exe")
+        else:
+            default_lh_console_path = os.path.join(
+                os.path.expanduser('~'), ".steam", "steam", partial_lh_console_bin_path, "linux64", "lighthouse_console")
+
         default_config = {
             "theme": "Dark",
-            "lighthouse_console_path": r"C:\Program Files (x86)\Steam\steamapps\common\SteamVR\tools\lighthouse\bin\win64\lighthouse_console.exe"
+            "lighthouse_console_path": default_lh_console_path
         }
 
         if not os.path.exists(resources_dir):

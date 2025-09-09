@@ -36,11 +36,18 @@ python3Packages.buildPythonApplication {
   ];
 
   meta = {
-    homepage = "https://github.com/TayouVR/watchman-pairing-assistant";
-    downloadPage = "https://github.com/TayouVR/watchman-pairing-assistant/releases";
+    homepage = "https://github.com/EinDev/watchman-pairing-assistant";
+    downloadPage = "https://github.com/EinDev/watchman-pairing-assistant/releases";
     description = "GUI for pairing SteamVR Tracking devices using lighthouse_console";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ TayouVR ];
+    maintainers = with lib.maintainers; [
+      {
+        name = "Tayou";
+        email = "nix-maintainer@tayou.org";
+        github = "TayouVR";
+        githubId = 31988415;
+      }
+    ];
     platforms = lib.platforms.linux;
   };
 }
